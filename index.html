@@ -7,7 +7,7 @@
     <style>
         body { text-align: center; font-family: 'Segoe UI', sans-serif; background: #fff5f5; color: #d63384; padding: 40px 20px; overflow-x: hidden; }
         img { width: 280px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 20px; position: relative; z-index: 10; }
-        #contador { font-size: 1.5rem; font-weight: bold; background: white; padding: 15px 25px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; z-index: 10; }
+        #contador { font-size: 1.5rem; font-weight: bold; background: white; padding: 15px 25px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; z-index: 10; min-width: 200px; }
         .mensagem { margin-top: 30px; font-size: 1.2rem; font-style: italic; position: relative; z-index: 10; line-height: 1.6; max-width: 500px; margin-left: auto; margin-right: auto; }
         .heart { position: fixed; top: -1vh; font-size: 20px; color: #ff4d6d; user-select: none; z-index: 1; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(105vh); } }
@@ -17,31 +17,32 @@
     <h1>Para o meu amor ❤️</h1>
     <img src="foto.jpg" alt="Nossa Foto">
     <br>
-    <div id="contador">Calculando...</div>
-    
-    <div class="mensagem">
-        "gostaria de me sentar na beira da praia para ver a lua contigo, mesmo sabendo que me perderia, pois acabaria olhando mais para ti"
-    </div>
-
+    <div id="contador" class="cor-texto">Carregando...</div>
+    <div class="mensagem">"gostaria de me sentar na beira da praia para ver a lua contigo, mesmo sabendo que me perderia, pois acabaria olhando mais para ti"</div>
     <script>
-        const dataInicio = new Date("2025-12-20T18:00:00");
+        const dataInicio = new Date("2025-12-20T18:00:00").getTime();
         function atualizar() {
-            const agora = new Date();
+            const agora = new Date().getTime();
             const diff = agora - dataInicio;
             const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutos = Math.floor((diff / 1000 / 60) % 60);
-            const segundos = Math.floor((diff / 1000) % 60);
-            document.getElementById("contador").innerHTML = `${dias} dias, ${horas}h, ${minutos}m e ${segundos}s`;
+            const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById("contador").innerHTML = dias + " dias, " + horas + "h, " + minutos + "m e " + segundos + "s";
         }
         setInterval(atualizar, 1000);
         atualizar();
         function createHeart() {
             const heart = document.createElement('div');
-            heart.classList.add('heart');
+            heart.className = 'heart';
             heart.innerHTML = '❤️';
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.animationDuration = Math.random() * 3 + 2 + 's';
             heart.style.opacity = Math.random();
             document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); },
+            setTimeout(() => { heart.remove(); }, 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
