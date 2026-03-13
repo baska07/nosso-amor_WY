@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nosso Amor</title>
     <style>
-        body { text-align: center; font-family: 'Segoe UI', sans-serif; background: #fff5f5; color: #d63384; padding: 50px; overflow-x: hidden; }
-        img { width: 300px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 20px; position: relative; z-index: 10; }
-        #contador { font-size: 1.6rem; font-weight: bold; background: white; padding: 20px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; z-index: 10; }
+        body { text-align: center; font-family: 'Segoe UI', sans-serif; background: #fff5f5; color: #d63384; padding: 40px 20px; overflow-x: hidden; }
+        img { width: 280px; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin-bottom: 20px; position: relative; z-index: 10; }
+        #contador { font-size: 1.5rem; font-weight: bold; background: white; padding: 15px 25px; border-radius: 50px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; z-index: 10; }
+        .mensagem { margin-top: 30px; font-size: 1.2rem; font-style: italic; position: relative; z-index: 10; line-height: 1.6; max-width: 500px; margin-left: auto; margin-right: auto; }
         .heart { position: fixed; top: -1vh; font-size: 20px; color: #ff4d6d; user-select: none; z-index: 1; animation: fall linear forwards; }
         @keyframes fall { to { transform: translateY(105vh); } }
     </style>
@@ -17,6 +18,11 @@
     <img src="foto.jpg" alt="Nossa Foto">
     <br>
     <div id="contador">Calculando...</div>
+    
+    <div class="mensagem">
+        "gostaria de me sentar na beira da praia para ver a lua contigo, mesmo sabendo que me perderia, pois acabaria olhando mais para ti"
+    </div>
+
     <script>
         const dataInicio = new Date("2025-12-20T18:00:00");
         function atualizar() {
@@ -38,9 +44,4 @@
             heart.style.animationDuration = Math.random() * 3 + 2 + 's';
             heart.style.opacity = Math.random();
             document.body.appendChild(heart);
-            setTimeout(() => { heart.remove(); }, 5000);
-        }
-        setInterval(createHeart, 300);
-    </script>
-</body>
-</html>
+            setTimeout(() => { heart.remove(); },
